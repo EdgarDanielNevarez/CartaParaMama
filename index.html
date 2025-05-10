@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjeta Día de la Madre</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f0e6;
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(45deg, #f5f0e6 25%, #efe5d5 25%, #efe5d5 50%, #f5f0e6 50%, #f5f0e6 75%, #efe5d5 75%, #efe5d5 100%);
+            background-size: 40px 40px;
+            transition: background 0.5s ease;
+        }
+        
+        .card-container {
+            position: relative;
+            width: 400px;
+            height: 500px;
+        }
+        
+        .blackboard {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: #222;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .message {
+            text-align: center;
+            z-index: 2;
+        }
+        
+        .message h1 {
+            color: white;
+            font-size: 36px;
+            margin-bottom: 10px;
+            font-family: 'Comic Sans MS', cursive;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.2);
+        }
+        
+        .message h2 {
+            color: #ff6b95;
+            font-size: 50px;
+            margin: 10px 0;
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            outline: none;
+        }
+        
+        .message h3 {
+            color: #ffcc29;
+            font-size: 32px;
+            margin-top: 20px;
+            font-family: 'Comic Sans MS', cursive;
+            padding: 10px 20px;
+            border: 2px solid #ffcc29;
+            border-radius: 20px;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 204, 41, 0.3);
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+        
+        .message h3:hover {
+            background-color: rgba(255, 204, 41, 0.2);
+            box-shadow: 0 0 20px rgba(255, 204, 41, 0.6);
+            transform: scale(1.05);
+        }
+        
+        .message h3:active {
+            transform: scale(0.98);
+            box-shadow: 0 0 5px rgba(255, 204, 41, 0.8);
+        }
+        
+        .message h3::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20px;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(30deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+        
+        .message h3:hover::after {
+            left: 120%;
+            opacity: 0.7;
+        }
+        
+        .flower {
+            position: absolute;
+            z-index: 1;
+        }
+        
+        .flower1 {
+            top: 10px;
+            left: 10px;
+            width: 60px;
+            height: 60px;
+            background-color: #ff6b95;
+            border-radius: 50%;
+        }
+        
+        .flower2 {
+            top: 20px;
+            left: 80px;
+            width: 50px;
+            height: 50px;
+            background-color: #ffcc29;
+            border-radius: 50%;
+        }
+        
+        .flower3 {
+            top: 10px;
+            right: 40px;
+            width: 40px;
+            height: 40px;
+            background-color: #ff9e4d;
+            border-radius: 50%;
+        }
+        
+        .flower4 {
+            top: 30px;
+            right: 100px;
+            width: 45px;
+            height: 45px;
+            background-color: #ff6b95;
+            border-radius: 50%;
+        }
+        
+        .flower5 {
+            bottom: 20px;
+            left: 30px;
+            width: 35px;
+            height: 35px;
+            background-color: #ffcc29;
+            border-radius: 50%;
+        }
+        
+        .flower6 {
+            bottom: 40px;
+            left: 80px;
+            width: 30px;
+            height: 30px;
+            background-color: #ff9e4d;
+            border-radius: 50%;
+        }
+        
+        .flower7 {
+            top: 5px;
+            left: 150px;
+            width: 42px;
+            height: 42px;
+            background-color: #ff88aa;
+            border-radius: 50%;
+        }
+        
+        .flower8 {
+            top: 15px;
+            right: 15px;
+            width: 38px;
+            height: 38px;
+            background-color: #ffdd55;
+            border-radius: 50%;
+        }
+        
+        .flower9 {
+            bottom: 25px;
+            right: 45px;
+            width: 32px;
+            height: 32px;
+            background-color: #ff9e4d;
+            border-radius: 50%;
+        }
+        
+        .flower10 {
+            bottom: 15px;
+            right: 90px;
+            width: 28px;
+            height: 28px;
+            background-color: #ff88aa;
+            border-radius: 50%;
+        }
+        
+        .flower11 {
+            top: 65px;
+            left: 30px;
+            width: 25px;
+            height: 25px;
+            background-color: #ff6b95;
+            border-radius: 50%;
+        }
+        
+        .flower12 {
+            top: 85px;
+            right: 60px;
+            width: 24px;
+            height: 24px;
+            background-color: #ffcc29;
+            border-radius: 50%;
+        }
+        
+        .flower13 {
+            bottom: 80px;
+            left: 15px;
+            width: 22px;
+            height: 22px;
+            background-color: #ff9e4d;
+            border-radius: 50%;
+        }
+        
+        .flower14 {
+            bottom: 70px;
+            right: 25px;
+            width: 20px;
+            height: 20px;
+            background-color: #ff6b95;
+            border-radius: 50%;
+        }
+        
+        .petal {
+            position: absolute;
+            background-color: inherit;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+        
+        .center {
+            position: absolute;
+            width: 40%;
+            height: 40%;
+            background-color: #ffff88;
+            border-radius: 50%;
+            top: 30%;
+            left: 30%;
+        }
+        
+        .flower1 .petal:nth-child(1) { transform: rotate(0deg) translateX(50%) scale(0.9); }
+        .flower1 .petal:nth-child(2) { transform: rotate(60deg) translateX(50%) scale(0.9); }
+        .flower1 .petal:nth-child(3) { transform: rotate(120deg) translateX(50%) scale(0.9); }
+        .flower1 .petal:nth-child(4) { transform: rotate(180deg) translateX(50%) scale(0.9); }
+        .flower1 .petal:nth-child(5) { transform: rotate(240deg) translateX(50%) scale(0.9); }
+        .flower1 .petal:nth-child(6) { transform: rotate(300deg) translateX(50%) scale(0.9); }
+        
+        .flower2 .petal:nth-child(1) { transform: rotate(0deg) translateX(50%) scale(0.9); }
+        .flower2 .petal:nth-child(2) { transform: rotate(72deg) translateX(50%) scale(0.9); }
+        .flower2 .petal:nth-child(3) { transform: rotate(144deg) translateX(50%) scale(0.9); }
+        .flower2 .petal:nth-child(4) { transform: rotate(216deg) translateX(50%) scale(0.9); }
+        .flower2 .petal:nth-child(5) { transform: rotate(288deg) translateX(50%) scale(0.9); }
+        
+        .flower3 .petal:nth-child(1) { transform: rotate(0deg) translateX(50%) scale(0.9); }
+        .flower3 .petal:nth-child(2) { transform: rotate(60deg) translateX(50%) scale(0.9); }
+        .flower3 .petal:nth-child(3) { transform: rotate(120deg) translateX(50%) scale(0.9); }
+        .flower3 .petal:nth-child(4) { transform: rotate(180deg) translateX(50%) scale(0.9); }
+        .flower3 .petal:nth-child(5) { transform: rotate(240deg) translateX(50%) scale(0.9); }
+        .flower3 .petal:nth-child(6) { transform: rotate(300deg) translateX(50%) scale(0.9); }
+        
+        .chalk-effect {
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.4);
+            font-weight: normal;
+        }
+        
+        .heart {
+            display: inline-block;
+            color: #ff6b95;
+            font-size: 24px;
+            animation: beat 1s infinite alternate;
+            transform-origin: center;
+        }
+        
+        @keyframes beat {
+            to { transform: scale(1.2); }
+        }
+        
+        /* Estilos para la carta */
+        .letter-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffcce0, #fff0cc);
+            z-index: 100;
+            overflow-y: auto;
+            padding: 40px;
+            box-sizing: border-box;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .letter-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        .letter-decoration {
+            position: absolute;
+            z-index: 1;
+        }
+        
+        .letter-title {
+            text-align: center;
+            color: #ff6b95;
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(255,155,170,0.3);
+        }
+        
+        .letter-body {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #444;
+            text-align: justify;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .letter-signature {
+            margin-top: 40px;
+            text-align: right;
+            font-size: 24px;
+            color: #ff6b95;
+        }
+        
+        .back-button {
+            display: block;
+            margin: 30px auto 0;
+            padding: 10px 25px;
+            background-color: #ff6b95;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 149, 0.3);
+        }
+        
+        .back-button:hover {
+            background-color: #ff4d7d;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 149, 0.4);
+        }
+        
+        .back-button:active {
+            transform: translateY(1px);
+        }
+        
+        .letter-decoration.flower {
+            border-radius: 50%;
+        }
+        
+        .letter-decoration.heart {
+            width: 30px;
+            height: 30px;
+            background-color: rgba(255, 107, 149, 0.2);
+            transform: rotate(45deg);
+            position: absolute;
+        }
+        
+        .letter-decoration.heart::before,
+        .letter-decoration.heart::after {
+            content: '';
+            width: 30px;
+            height: 30px;
+            background-color: rgba(255, 107, 149, 0.2);
+            border-radius: 50%;
+            position: absolute;
+        }
+        
+        .letter-decoration.heart::before {
+            top: -15px;
+            left: 0;
+        }
+        
+        .letter-decoration.heart::after {
+            top: 0;
+            left: -15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Primera página: Tarjeta -->
+    <div class="card-container" id="card-page">
+        <div class="blackboard">
+            <div class="flower flower1">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="center"></div>
+            </div>
+            <div class="flower flower2">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="center"></div>
+            </div>
+            <div class="flower flower3">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="center"></div>
+            </div>
+            <div class="flower flower4">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="center"></div>
+            </div>
+            <div class="flower flower5">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="center"></div>
+            </div>
+            <div class="flower flower6">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="center"></div>
+            </div>
+            <div class="flower flower7">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="center"></div>
+            </div>
+            <div class="flower flower8">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="center"></div>
+            </div>
+            <div class="flower flower9">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="center"></div>
+            </div>
+            <div class="flower flower10">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="center"></div>
+            </div>
+            <div class="flower flower11">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="center"></div>
+            </div>
+            <div class="flower flower12">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="center"></div>
+            </div>
+            <div class="flower flower13">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="center"></div>
+            </div>
+            <div class="flower flower14">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="center"></div>
+            </div>
+            
+            <div class="message">
+                <h1 class="chalk-effect">Te quiero mucho</h1>
+                <h2 class="chalk-effect">madre mía</h2>
+                <button onclick="openLetter()" class="chalk-effect">
+                    <h3 class="chalk-effect">Feliz día mamá <span class="heart">♥</span></h3>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Segunda página: Carta -->
+    <div class="letter-page" id="letter-page">
+        <div class="letter-content">
+            <!-- Decoraciones de la carta -->
+            <div class="letter-decoration heart" style="top: 20px; right: 30px;"></div>
+            <div class="letter-decoration heart" style="bottom: 40px; left: 50px;"></div>
+            <div class="letter-decoration heart" style="top: 200px; left: 20px;"></div>
+            <div class="letter-decoration heart" style="bottom: 100px; right: 70px;"></div>
+            
+            <h1 class="letter-title">Para la mejor mamá del mundo</h1>
+            
+            <div class="letter-body">
+                <p>Querida mamá:</p>
+
+                <p>¿Qué te puedemos contar, madre? ¿Qué puedo decirte que no sepas ya?
+                Hoy nos detrendremos un momento y piensamos… 
+                <p> ya sabesmos qué queremos decirte:</p>
+
+                ¡Feliz Día de las Madres!</p>
+
+                Gracias, mamá, por todo lo que haces.</p>
+                Gracias por cada esfuerzo, por cada desvelo, por cada paso que das por nosotros.</p>
+                Gracias por ser ese pilar tan grande y fuerte que sostiene a esta familia,</p>
+                por luchar cada día para llevar a tus dos hijos hacia donde sueñan llegar.</p>
+                Eres una mujer increíble, y no hay palabras suficientes para agradecerte todo lo que haces.</p>
+                Hoy y siempre, quiero que sepas cuánto te amo y admiro.</p>
+                <div class="letter-signature">
+                    Te quiero infinitamente,<br>
+                    Daniel y Jose
+                </div>
+            </div>
+            
+            <button class="back-button" onclick="closeLetterAndShowConfetti()">Volver a la tarjeta</button>
+        </div>
+    </div>
+    
+    <script>
+        function openLetter() {
+            document.getElementById('card-page').style.display = 'none';
+            document.getElementById('letter-page').style.display = 'block';
+            document.body.style.background = 'linear-gradient(135deg, #ffcce0, #fff0cc)';
+        }
+        
+        function closeLetterAndShowConfetti() {
+            document.getElementById('letter-page').style.display = 'none';
+            document.getElementById('card-page').style.display = 'block';
+            document.body.style.backgroundImage = 'linear-gradient(45deg, #f5f0e6 25%, #efe5d5 25%, #efe5d5 50%, #f5f0e6 50%, #f5f0e6 75%, #efe5d5 75%, #efe5d5 100%)';
+            
+            // Create confetti effect
+            for (let i = 0; i < 50; i++) {
+                createConfetti();
+            }
+        }
+        
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.style.position = 'absolute';
+            confetti.style.width = Math.random() * 10 + 5 + 'px';
+            confetti.style.height = Math.random() * 10 + 5 + 'px';
+            confetti.style.backgroundColor = getRandomColor();
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.top = '-20px';
+            confetti.style.zIndex = '3';
+            document.querySelector('.blackboard').appendChild(confetti);
+            
+            let speed = Math.random() * 3 + 2;
+            let rotation = Math.random() * 360;
+            let rotSpeed = Math.random() * 5 - 2.5;
+            let xPos = parseFloat(confetti.style.left);
+            let yPos = -20;
+            let xSpeed = Math.random() * 2 - 1;
+            
+            function fall() {
+                yPos += speed;
+                xPos += xSpeed;
+                rotation += rotSpeed;
+                confetti.style.top = yPos + 'px';
+                confetti.style.left = xPos + '%';
+                confetti.style.transform = 'rotate(' + rotation + 'deg)';
+                
+                if (yPos < window.innerHeight + 50) {
+                    requestAnimationFrame(fall);
+                } else {
+                    confetti.remove();
+                }
+            }
+            
+            fall();
+        }
+        
+        function getRandomColor() {
+            const colors = ['#ff6b95', '#ffcc29', '#ff9e4d', '#ff88aa', '#ffdd55'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+    </script>
+</body>
+</html>
+
